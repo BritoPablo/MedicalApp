@@ -12,9 +12,7 @@ const AuthLayout = ({ children, title = "", caption="" }) => {
     <>
     <Paper 
     sx={{backgroundImage: 'url(../../public/assets/images/backGrounds/fondoLogSing.png)', backgroundSize: 'cover', backgroundPosition: 'center'}}
-    >
-
-   
+    >  
       <CssBaseline />
       <Grid
         container
@@ -24,7 +22,9 @@ const AuthLayout = ({ children, title = "", caption="" }) => {
         justifyContent="center"
         sx={{
           minHeight: "100vh",
-          padding: 4,
+          padding: {
+            sm : 4
+          }
         }}
       >
         <Grid
@@ -36,7 +36,10 @@ const AuthLayout = ({ children, title = "", caption="" }) => {
             backgroundColor: "white",
             padding: 3,
             borderRadius: 2,
-            minHeight: "calc(100vh - 60px)",
+            minHeight: {
+              sm : "calc(100vh - 70px)",
+              xs : "100vh"
+            },
           }}
         >
           <Grid container justifyContent="center" minHeight={150}>
