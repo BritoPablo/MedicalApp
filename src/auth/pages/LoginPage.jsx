@@ -7,13 +7,16 @@ import { tokens } from "../../theme";
 import { useForm } from "../../hooks";
 import { checkingAuthentication } from "../../store/auth";
 
+
+const formData = {
+  email: 'pablo@gmail.com',
+  password: '123456'
+}
+
 export const LoginPage = () => {
   const colors = tokens("light");
   const dispatch = useDispatch()  
-  const {email, password, onInputChange} = useForm({
-    email: 'pablo@gmail.com',
-    password: '123456'
-  });
+  const {email, password, onInputChange} = useForm(formData);
 
   const onSubmit = (event) => {
     event.preventDefault();
