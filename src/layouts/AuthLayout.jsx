@@ -2,8 +2,6 @@ import { CssBaseline, Grid, Paper, Typography } from "@mui/material";
 import LogoLogin from "../../public/assets/logos/logoLogin.svg";
 import { tokens } from "../theme";
 
-import fondoLogo from "../../public/assets/images/backGrounds/fondoLogSing.png"
-
 
 const AuthLayout = ({ children, title = "", caption="" }) => {
   const colors = tokens("light");
@@ -18,42 +16,48 @@ const AuthLayout = ({ children, title = "", caption="" }) => {
         container
         spacing={0}
         direction="column"
-        alignItems="start"
         justifyContent="center"
         sx={{
           minHeight: "100vh",
           padding: {
             sm : 4
+          },
+          alignItems : {
+            xs : "center",
+            md : "start"
           }
         }}
       >
         <Grid
           container
           direction="column"
-          md={8}
-          lg={4}
           sx={{
             backgroundColor: "white",
             padding: 3,
             borderRadius: 2,
-            minHeight: {
-              sm : "calc(100vh - 70px)",
-              xs : "100vh"
+            maxWidth: {
+              sm: "60vw",
+              md: "50vw",
+              lg: "30vw"
             },
+            minHeight: {
+              xs : "100vh",
+              sm : "85vh"
+            },       
           }}
         >
-          <Grid container justifyContent="center" minHeight={150}>
+          <Grid container justifyContent="center" minHeight={90}>
             <img src={LogoLogin} alt="MedicalApp" width={150} height="auto" />
           </Grid>
-          <Grid
+          <Grid    
             container
             direction="column"
             justifyContent="center"
-            fullWidth
-            minHeight={80}
+            sx={{ width: "100%" }}
+            minHeight={70}
           >
             <Typography
-              variant="h5"
+              variant="h6"
               sx={{
                 color: colors.medColors[200],
                 fontWeight: "bold",
