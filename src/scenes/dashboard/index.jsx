@@ -9,7 +9,7 @@ export const Dashboard = () => {
         <CardMedia
         component="img"
         height="auto"
-        image="../../../public/assets/images/backGrounds/fondoLogSing.png"
+        image="../assets/images/backGrounds/fondoLogSing.png"
         />
         <CardContent>
         <Typography variant="body2" color="text.secondary">

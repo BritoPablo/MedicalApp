@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid, TextField } from "@mui/material";
 
@@ -7,24 +7,21 @@ import { tokens } from "../../theme";
 import { useForm } from "../../hooks";
 import { checkingAuthentication } from "../../store/auth";
 
-
 const formData = {
-  email: 'pablo@gmail.com',
-  password: '123456'
-}
+  email: "pablo@gmail.com",
+  password: "123456",
+};
 
-export const LoginPage = () => {
+function LoginPage() {
   const colors = tokens("light");
-  const dispatch = useDispatch()  
-  const {email, password, onInputChange} = useForm(formData);
+  const dispatch = useDispatch();
+  const { email, password, onInputChange } = useForm(formData);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log({email, password});
-    dispatch( checkingAuthentication() );
-  }
-
-
+    console.log({ email, password });
+    dispatch(checkingAuthentication());
+  };
 
   return (
     <>
@@ -104,7 +101,6 @@ export const LoginPage = () => {
                   variant="text"
                   fullWidth
                   sx={{
-                    
                     borderRadius: 25,
                     height: 50,
                     textTransform: "none",
@@ -122,4 +118,8 @@ export const LoginPage = () => {
       </AuthLayout>
     </>
   );
-};
+}
+
+const mapStateToProps = (state) => ({});
+
+export default connect(mapStateToProps, {})(LoginPage);

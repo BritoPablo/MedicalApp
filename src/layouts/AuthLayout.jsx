@@ -1,5 +1,5 @@
 import { CssBaseline, Grid, Paper, Typography } from "@mui/material";
-import LogoLogin from "../../public/assets/logos/logoLogin.svg";
+import LogoLogin from "../assets/logos/logoLogin.svg";
 import { tokens } from "../theme";
 
 
@@ -9,7 +9,7 @@ const AuthLayout = ({ children, title = "", caption="" }) => {
   return (
     <>
     <Paper 
-    sx={{backgroundImage: 'url(../../public/assets/images/backGrounds/fondoLogSing.png)', backgroundSize: 'cover', backgroundPosition: 'center'}}
+    sx={{backgroundImage: 'url(../assets/images/backGrounds/fondoLogSing.png)', backgroundSize: 'cover', backgroundPosition: 'center'}}
     >  
       <CssBaseline />
       <Grid
