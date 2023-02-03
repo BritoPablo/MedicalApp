@@ -18,7 +18,7 @@ import {
 
 
 import axios from 'axios'
-
+import { configEnv } from '../../../../configEnv';
 
 export const load_user = () => async dispatch => {
     if(localStorage.getItem('access')){
@@ -31,7 +31,7 @@ export const load_user = () => async dispatch => {
         };
         
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/me/`, config)
+            const res = await axios.get(`${configEnv.REACT_APP_API_URL}/auth/users/me/`, config)
 
             if(res.status === 200) {
                 dispatch({
@@ -67,12 +67,13 @@ export const login = (email, password) => async dispatch => {
     });
 
     try{
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create`, body, config);
+        const res = await axios.post(`${configEnv.REACT_APP_API_URL}/auth/jwt/create/`, body, config);
         if(res.status===200){
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data
             });
+            console.log(res.data)
             dispatch(load_user());
             dispatch({
                 type: REMOVE_AUTH_LOADING
@@ -109,7 +110,7 @@ export const check_authtenticated = () => async dispatch => {
         });
 
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/verify`, body, config);
+            const res = await axios.post(`${configEnv.REACT_APP_API_URL}/auth/jwt/verify`, body, config);
 
             if(res.status===200){
                 dispatch({
@@ -146,7 +147,7 @@ export const refresh = () => async dispatch => {
         });
 
         try{
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/refresh`, body, config)
+            const res = await axios.post(`${configEnv.REACT_APP_API_URL}/auth/jwt/refresh`, body, config)
             if(res.status ===200){
                 dispatch({
                     type: REFRESH_SUCCESS,
@@ -182,7 +183,7 @@ export const reset_password = (email) => async dispatch => {
         email
     });
     try{
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/users/reset_password`, body, config);
+        const res = await axios.post(`${configEnv.REACT_APP_API_URL}/auth/jwt/users/reset_password`, body, config);
         if(res.status === 204){
             dispatch({
                 type: RESET_PASSWORD_SUCCESS
@@ -231,7 +232,7 @@ export const reset_password_confirm = (uid, token, new_password, re_new_password
         });
     } else {
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password`, body, config);
+            const res = await axios.post(`${configEnv.REACT_APP_API_URL}/auth/users/reset_password`, body, config);
             if(res.status === 204) {
                 dispatch({
                     type: RESET_PASSWORD_CONFIRM_SUCCESS

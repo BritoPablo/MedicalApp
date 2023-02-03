@@ -17,6 +17,7 @@ specifiers:
   react-toastify: ^9.1.1
   redux: ^4.2.1
   redux-devtools: ^3.7.0
+  redux-devtools-extension: ^2.13.9
   vite: ^4.0.0
 
 dependencies:
@@ -33,6 +34,7 @@ dependencies:
   react-toastify: 9.1.1_biqbaboplfbrettd7655fr4n2y
   redux: 4.2.1
   redux-devtools: 3.7.0_bqc5wbq65zmqqpvwou42otfgj4
+  redux-devtools-extension: 2.13.9_redux@4.2.1
 
 devDependencies:
   '@types/react': 18.0.26
@@ -1394,6 +1396,15 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
+
+  /redux-devtools-extension/2.13.9_redux@4.2.1:
+    resolution: {integrity: sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A==}
+    deprecated: Package moved to @redux-devtools/extension.
+    peerDependencies:
+      redux: ^3.1.0 || ^4.0.0
+    dependencies:
+      redux: 4.2.1
     dev: false
 
   /redux-devtools-instrument/1.10.0_redux@4.2.1:

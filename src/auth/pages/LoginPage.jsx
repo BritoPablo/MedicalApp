@@ -5,14 +5,22 @@ import { Button, Grid, TextField } from "@mui/material";
 import AuthLayout from "../../layouts/AuthLayout";
 import { tokens } from "../../theme";
 import { useForm } from "../../hooks";
-import { checkingAuthentication } from "../../store/auth";
+//import { checkingAuthentication, login } from "../../store/auth";
+import { login, refresh, load_user, check_authtenticated } from "../../redux/actions/auth/auth";
 
 const formData = {
-  email: "pablo@gmail.com",
-  password: "123456",
+  email: "prueba@outlook.com",
+  password: "Dfsdftaweewf3",
 };
 
-function LoginPage() {
+function LoginPage(
+  {login,
+  isAuthenticated,
+  loading,
+  refresh,
+  load_user,
+  check_authtenticated,
+}) {
   const colors = tokens("light");
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm(formData);
@@ -20,7 +28,8 @@ function LoginPage() {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log({ email, password });
-    dispatch(checkingAuthentication());
+    //dispatch(checkingAuthentication());
+    login(email, password)
   };
 
   return (
@@ -120,6 +129,14 @@ function LoginPage() {
   );
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  loading: state.auth.loading
+});
 
-export default connect(mapStateToProps, {})(LoginPage);
+export default connect(mapStateToProps, {
+  login,
+  refresh,
+  load_user,
+  check_authtenticated
+})(LoginPage);
