@@ -1,35 +1,28 @@
-import { useDispatch, connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid, TextField } from "@mui/material";
 
 import AuthLayout from "../../layouts/AuthLayout";
 import { tokens } from "../../theme";
 import { useForm } from "../../hooks";
-//import { checkingAuthentication, login } from "../../store/auth";
-import { login, refresh, load_user, check_authtenticated } from "../../redux/actions/auth/auth";
+import { login } from "../../store/auth";
+//import { login, refresh, load_user, check_authtenticated } from "../../redux/actions/auth/auth";
 
 const formData = {
   email: "prueba@outlook.com",
   password: "Dfsdftaweewf3",
 };
 
-function LoginPage(
-  {login,
-  isAuthenticated,
-  loading,
-  refresh,
-  load_user,
-  check_authtenticated,
-}) {
+function LoginPage() {
   const colors = tokens("light");
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm(formData);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log({ email, password });
-    //dispatch(checkingAuthentication());
-    login(email, password)
+    //console.log({ email, password });
+    dispatch(login(email, password));
+    //start_login(email, password)
   };
 
   return (
@@ -129,14 +122,4 @@ function LoginPage(
   );
 }
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  loading: state.auth.loading
-});
-
-export default connect(mapStateToProps, {
-  login,
-  refresh,
-  load_user,
-  check_authtenticated
-})(LoginPage);
+export default LoginPage;

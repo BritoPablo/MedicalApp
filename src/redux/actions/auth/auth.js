@@ -21,6 +21,7 @@ import axios from 'axios'
 import { configEnv } from '../../../../configEnv';
 
 export const load_user = () => async dispatch => {
+    console.log("ohosa")
     if(localStorage.getItem('access')){
 
         const config = {
@@ -73,7 +74,6 @@ export const login = (email, password) => async dispatch => {
                 type: LOGIN_SUCCESS,
                 payload: res.data
             });
-            console.log(res.data)
             dispatch(load_user());
             dispatch({
                 type: REMOVE_AUTH_LOADING
