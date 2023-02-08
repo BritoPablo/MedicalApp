@@ -1,21 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAIL,
-  RESET_PASSWORD_CONFIRM_SUCCESS,
-  RESET_PASSWORD_CONFIRM_FAIL,
-  SET_AUTH_LOADING,
-  REMOVE_AUTH_LOADING,
-  LOGOUT,
-  AUTHENTICATED_SUCCESS,
-  AUTHENTICATED_FAIL,
-  REFRESH_SUCCESS,
-  REFRESH_FAIL,
-  USER_LOADED_SUCCESS,
-  USER_LOADED_FAIL,
-} from "./types";
 
 export const authSlice = createSlice({
   name: "auth",
@@ -24,43 +7,13 @@ export const authSlice = createSlice({
     refresh: localStorage.getItem("refresh"),
     isAuthenticated: null,
     user: null,
+    newUser: null,
     loading: false,
     user_loading: true,
+    authError: false,
+    errorAccountExist: null
   },
 
-  /*
-  initialState: {
-    status: "checking", // 'checking', not-authenticated , 'authtenticated'
-    email: null,
-    id: null,
-    first_name: null,
-    last_name: null,
-    is_active: false,
-    is_editor: false,
-    is_staff: false,
-    errorMessage: null,
-    access: null,
-    refresh: null,
-  }, */
-  /*
-  reducers: {
-    load_tokens: (state, action) => {
-      state.access = action.payload.access;
-      state.refresh = action.payload.access;
-    },
-    setStatus: (state, action) => {
-      state.status = `${action.payload}`;
-    },
-    load_user_data: (state, action) => {
-      state.email = action.payload.email;
-      state.id = action.payload.id;
-      state.first_name = action.payload.first_name;
-      state.last_name = action.payload.last_name;
-      state.is_active = action.payload.is_active;
-      state.is_editor = action.payload.is_editor;
-      state.is_staff = action.payload.is_staff;
-    },
-  },*/
   reducers: {
     setAuthLoading: (state) => {
       state.loading = true;
@@ -102,6 +55,15 @@ export const authSlice = createSlice({
     checkAuthFail: (state)=>{
       state.loading = false;
     },
+    authError: (state) => {
+      state.authError= true;
+    },
+    errorAccountExist: (state) =>{
+      state.errorAccountExist = true;
+    },
+    newUserCreated: (state,payload)=>{
+      state.newUser = payload.payload
+    }
   },
 });
 export const {
@@ -114,4 +76,7 @@ export const {
   authenticatedSuccess,
   refreshSuccess,
   checkAuthFail,
+  authError,
+  errorAccountExist,
+  newUserCreated
 } = authSlice.actions;

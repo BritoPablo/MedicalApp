@@ -16,7 +16,6 @@ const CheckingAuth = () => {
       >
         <Grid
         item
-        
         justifyContent="center"
         >
             <CircularProgress color="warning"/>

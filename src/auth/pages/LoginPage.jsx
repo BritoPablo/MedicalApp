@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid, TextField } from "@mui/material";
+import { Alert, Button, Grid, TextField } from "@mui/material";
 
 import AuthLayout from "../../layouts/AuthLayout";
 import { tokens } from "../../theme";
@@ -18,11 +18,11 @@ function LoginPage() {
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm(formData);
 
+  const {authError} = useSelector(state => state.auth);
+
   const onSubmit = (event) => {
     event.preventDefault();
-    //console.log({ email, password });
     dispatch(login(email, password));
-    //start_login(email, password)
   };
 
   return (
@@ -55,6 +55,14 @@ function LoginPage() {
                 onChange={onInputChange}
               />
             </Grid>
+
+            <Alert 
+            severity="error"
+            sx={{
+              display : authError ? "": "none",
+              margin: '5px',
+            }}
+            >Sucedio un error en el servidor, por favor intente nuevamente.</Alert>
             <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
               <Grid item xs={12}>
                 <Button

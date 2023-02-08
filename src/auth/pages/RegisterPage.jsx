@@ -1,28 +1,27 @@
-import { Box, Button, Grid, IconButton, Link, TextField, Tooltip, Typography } from "@mui/material";
-import HelpIcon from '@mui/icons-material/Help';
+import { Alert, Button, Grid, Link, TextField} from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm } from "../../hooks";
 import AuthLayout from "../../layouts/AuthLayout";
 import { tokens } from "../../theme";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../store/auth";
 
 const formData = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  password: "",
-  passwordCheck: "",
+  first_name: "Pablo",
+  last_name: "Burt",
+  email: "pb@mail.com",
+  password: "Zaxscd12345??",
+  passwordCheck: "Zaxscd12345??",
 };
 
 const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
 const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
 const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()+=?])(?!\s)[a-zA-Z\d!@#$%^&*()+=?]{8,16}$/m;
 
-
-
-
 export const RegisterPage = () => {
   const colors = tokens("");
+  const dispatch = useDispatch();
 
   const [formSubmitted, setFormSubmitted] = useState(false)
 
@@ -51,10 +50,20 @@ export const RegisterPage = () => {
 
   } = useForm(formData, formValidations, formSubmitted );
 
+  const {authError, errorAccountExist} = useSelector(state => state.auth);
+
   const onSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
-    if (isFormValid) alert("el formulario es valido")
+    if (isFormValid) {
+      alert("el formulario es valido");
+      dispatch(register(
+        first_name,
+        last_name,
+        email,
+        password,
+        passwordCheck,))
+    }
   };
 
   return (
@@ -135,6 +144,17 @@ export const RegisterPage = () => {
                 helperText={passwordCheckValid}
               />
             </Grid>
+            <Alert 
+            severity="error"
+            sx={{
+              display : (authError || errorAccountExist) ? "": "none",
+              margin: '5px',
+            }}
+            >
+              {errorAccountExist
+              ? "Ya hay un usuario registrado con este email" 
+              : "Sucedio un error en el servidor, por favor intente nuevamente."}
+              </Alert>
             <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
               <Grid item xs={12}>
                 <Button

@@ -20,9 +20,9 @@ function App() {
     }
   }, [])
 
-  if(!isAuthenticated){
-    return <CheckingAuth/>
-  }
+  // if(!isAuthenticated){
+  //   return <CheckingAuth/>
+  // }
 
   return (
     <>

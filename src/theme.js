@@ -61,6 +61,20 @@ export const tokens = (mode) => ({
           800: "#2a2d64",
           900: "#151632",
         },
+        berry: {
+          100: "#eef2f6", //blue ligth
+          200: "#2196F3", //blue intensive
+        },
+        medColors: {
+          100: "#264653", //verde oscuro
+          150: "#028090",
+          200: "#2a9d8f", //verde claro turquesa
+          250: "#cbf3f0", // verde mas claro
+          300: "#e9c46a", //amarillo mostaza claro
+          400: "#f4a261", // anaranjado
+          500: "#e76f51", // rojo despintado
+          600: "#D3D3D3", // color hueso
+        }
       }
     : {
         grey: {
@@ -118,6 +132,10 @@ export const tokens = (mode) => ({
           800: "#c3c6fd",
           900: "#e1e2fe",
         },
+        berry: {
+          100: "#eef2f6", //blue ligth
+          200: "#2196F3", //blue intensive
+        },
         medColors: {
           100: "#264653", //verde oscuro
           150: "#028090",
@@ -127,7 +145,6 @@ export const tokens = (mode) => ({
           400: "#f4a261", // anaranjado
           500: "#e76f51", // rojo despintado
           600: "#D3D3D3", // color hueso
-
         }
       }),
 });
