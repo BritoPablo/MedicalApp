@@ -9,8 +9,8 @@ import { login } from "../../store/auth";
 //import { login, refresh, load_user, check_authtenticated } from "../../redux/actions/auth/auth";
 
 const formData = {
-  email: "prueba@outlook.com",
-  password: "Dfsdftaweewf3",
+  email: "pb@mail.com",
+  password: "Zaxscd12345??",
 };
 
 function LoginPage() {
@@ -18,7 +18,7 @@ function LoginPage() {
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm(formData);
 
-  const {authError} = useSelector(state => state.auth);
+  const {authError, accountActiveError} = useSelector(state => state.auth);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -61,8 +61,13 @@ function LoginPage() {
             sx={{
               display : authError ? "": "none",
               margin: '5px',
-            }}
-            >Sucedio un error en el servidor, por favor intente nuevamente.</Alert>
+            }}>
+              { 
+              accountActiveError 
+              ? "La cuenta no esta activada, por favor revise su correo."
+              : "Sucedio un error en el servidor, por favor intente nuevamente."
+              }
+              </Alert>
             <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
               <Grid item xs={12}>
                 <Button

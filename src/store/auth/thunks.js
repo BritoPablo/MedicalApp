@@ -12,7 +12,8 @@ import {
   checkAuthFail,
   authError,
   errorAccountExist,
-  newUserCreated
+  newUserCreated,
+  activateAccountError
 } from "./";
 
 export const login = (email, password) => async (dispatch) => {
@@ -39,15 +40,22 @@ export const login = (email, password) => async (dispatch) => {
       dispatch(loginSuccess(res.data));
       dispatch(load_user());
       dispatch(removeAuthLoading());
+    } else if(res.status === 401){
+      dispatch(activateAccountError())
+      dispatch(removeAuthLoading());
     } else {
       dispatch(authError())
-      dispatch(removeUserData());
       dispatch(removeAuthLoading());
     }
   } catch (err) {
+    if(err.response.status === 401){
+      dispatch(authError())
+      dispatch(activateAccountError())
+      dispatch(removeAuthLoading());
+    } else {
     dispatch(authError())
-    dispatch(removeUserData());
     dispatch(removeAuthLoading());
+    }
   }
 };
 
@@ -254,11 +262,17 @@ export const register =  (first_name, last_name, email, password, passwordCheck)
         dispatch(errorAccountExist())
         dispatch(removeAuthLoading());
       } else {
+        
         dispatch(authError())
         dispatch(removeAuthLoading());
       }
     } catch (err) {
-      dispatch(authError())
-      dispatch(removeAuthLoading());
+      if(err.response.status === 400) {
+        dispatch(errorAccountExist())
+        dispatch(removeAuthLoading());
+      } else{
+        dispatch(authError())
+        dispatch(removeAuthLoading());
+      }
     }
   };

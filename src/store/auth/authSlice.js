@@ -11,7 +11,8 @@ export const authSlice = createSlice({
     loading: false,
     user_loading: true,
     authError: false,
-    errorAccountExist: null
+    errorAccountExist: null,
+    accountActiveError: false
   },
 
   reducers: {
@@ -63,6 +64,23 @@ export const authSlice = createSlice({
     },
     newUserCreated: (state,payload)=>{
       state.newUser = payload.payload
+    },
+    resetAuthState: (state) =>{
+      localStorage.removeItem("access");
+      localStorage.removeItem("refresh");
+      state.access= null; 
+      state.refresh= null ;
+      state.isAuthenticated= null;
+      state.user= null;
+      state.newUser= null;
+      state.loading= false;
+      state.user_loading= true;
+      state.authError= false;
+      state.errorAccountExist= null;
+      state.accountActiveError = false;
+    },
+    activateAccountError: (state) => {
+      state.accountActiveError = true;
     }
   },
 });
@@ -78,5 +96,7 @@ export const {
   checkAuthFail,
   authError,
   errorAccountExist,
-  newUserCreated
+  newUserCreated,
+  resetAuthState,
+  activateAccountError
 } = authSlice.actions;
